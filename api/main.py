@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 from fastapi import FastAPI
+import matplotlib.pyplot as plt, mpld3
 
 headers = {
   'Accept': 'application/json'
@@ -20,8 +21,8 @@ def get_iris():
 
     return iris
 
-@app.get("/3besttimes")
-def get_iris():
+@app.get("/top-three-slots")
+def top_three_slots():
 
     r = requests.get('https://api.carbonintensity.org.uk/intensity/2022-10-22T12:35Z/fw24h', headers = headers)
     r = r.json()
@@ -30,3 +31,19 @@ def get_iris():
     data = data.set_index('from')
     smallest = data.nsmallest(3,"intensity.forecast")
     return smallest.to_dict()
+
+@app.get("/scorer")
+
+@app.get("/graph")
+def graph(date = "2022-10-22T12:35Z"):
+    url = 'https://api.carbonintensity.org.uk/intensity/' + date + '/fw24h'
+    r = requests.get(url, headers = headers)
+    r = r.json()
+    data = pd.json_normalize(r['data'], max_level=1)
+    data = data.drop(['to', 'intensity.actual', 'intensity.index'], axis = 1)
+    data = data.set_index('from')
+    data = data.reset_index()
+    data['from'] = pd.to_datetime(data['from'], format = '%Y-%m-%dT%H:%MZ')
+    fig = plt.figure(figsize =(4, 4))
+    plt.plot(data["from"], data["intensity.forecast"])
+    return mpld3.fig_to_dict(fig)
