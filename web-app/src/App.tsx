@@ -3,17 +3,22 @@
 import './App.css';
 import { Routes, Route } from "react-router-dom";
 import { Login, SignUp, Calculator } from './pages';
+import Navbar from './components/shared/Navbar';
 
 function App() {
   return (
-    <div className="App">
-      <Routes>
+    <div>
+      <Navbar />
         {/*  */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/calculator" element={<Calculator />} />
+        <div className="container">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/calculator" element={<Calculator />} />
+          </Routes>
+        </div>
         
-      </Routes>
+      
     </div>
   );
 }
