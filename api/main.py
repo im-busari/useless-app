@@ -20,7 +20,7 @@ def get_iris():
 
     return iris
 
-@app.get("/energy")
+@app.get("/3besttimes")
 def get_iris():
 
     r = requests.get('https://api.carbonintensity.org.uk/intensity/2022-10-22T12:35Z/fw24h', headers = headers)
@@ -28,5 +28,5 @@ def get_iris():
     data = pd.json_normalize(r['data'], max_level=1)
     data = data.drop(['to', 'intensity.actual', 'intensity.index'], axis = 1)
     data = data.set_index('from')
-    
-    return data.to_dict()
+    smallest = data.nsmallest(3,"intensity.forecast")
+    return smallest.to_dict()
