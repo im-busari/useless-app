@@ -4,6 +4,8 @@ import './App.css';
 import { Routes, Route } from "react-router-dom";
 import { Login, SignUp, Calculator } from './pages';
 import Navbar from './components/shared/Navbar';
+import Dashboard from './pages/Dashboard';
+import Leaderboard from './pages/Leaderboard';
 
 function App() {
   return (
@@ -12,9 +14,12 @@ function App() {
         {/*  */}
         <div className="container">
         <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/calculator" element={<Calculator />} />
+          <Route path="/tasks" element={<Calculator />} />
           </Routes>
         </div>
         
