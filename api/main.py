@@ -22,9 +22,9 @@ def get_iris():
     return iris
 
 @app.get("/top-three-slots")
-def top_three_slots():
-
-    r = requests.get('https://api.carbonintensity.org.uk/intensity/2022-10-22T12:35Z/fw24h', headers = headers)
+def top_three_slots(date = "2022-10-22T12:35Z"):
+    url = 'https://api.carbonintensity.org.uk/intensity/' + date + '/fw24h'
+    r = requests.get(url, headers = headers)
     r = r.json()
     data = pd.json_normalize(r['data'], max_level=1)
     data = data.drop(['to', 'intensity.actual', 'intensity.index'], axis = 1)
