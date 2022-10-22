@@ -8,6 +8,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        {/*  */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/calculator" element={<Calculator />} />
