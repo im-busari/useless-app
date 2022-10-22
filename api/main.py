@@ -21,8 +21,9 @@ def get_iris():
 
     return iris
 
+"""This endpoint returns a JSON dictionary with the top three slots for a given date and duration up to 24 hours in advance."""
 @app.get("/top-three-slots")
-def top_three_slots(date = "2022-10-22T12:35Z"):
+def top_three_slots(date = "2022-10-22T12:35Z", duration = 0.5):
     url = 'https://api.carbonintensity.org.uk/intensity/' + date + '/fw24h'
     r = requests.get(url, headers = headers)
     r = r.json()
@@ -32,8 +33,7 @@ def top_three_slots(date = "2022-10-22T12:35Z"):
     smallest = data.nsmallest(3,"intensity.forecast")
     return smallest.to_dict()
 
-@app.get("/scorer")
-
+"""This endpoint returns a JSON dictionary with a graph of the carbon intensity over the next 24 hours."""
 @app.get("/graph")
 def graph(date = "2022-10-22T12:35Z"):
     url = 'https://api.carbonintensity.org.uk/intensity/' + date + '/fw24h'
