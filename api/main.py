@@ -29,4 +29,4 @@ def get_iris():
     data = data.drop(['to', 'intensity.actual', 'intensity.index'], axis = 1)
     data = data.set_index('from')
     
-    return data.to_json()
+    return data.to_dict()
