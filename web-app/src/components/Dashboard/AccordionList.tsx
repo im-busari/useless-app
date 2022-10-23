@@ -1,30 +1,37 @@
 import React, { useState } from 'react';
+import { IApliance } from '../../interfaces/IAppliance';
 import AccordionItem from './AccordionItem';
 
 const AccordionList = () => {
 
     const accordionData = [{
       id: '1',
-      title: 'Section 1',
-      content: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis sapiente
-        laborum cupiditate possimus labore, hic temporibus velit dicta earum
-        suscipit commodi eum enim atque at? Et perspiciatis dolore iure
-        voluptatem.`
+      appliance: 'Dishwasher',
+      description: `Washed the plates from last night (gathering with friends).`,
+      timestamp: "data",
+      score: 5
     }, {
       id: '2',
-      title: 'Section 2',
-      content: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis sapiente
-        laborum cupiditate possimus labore, hic temporibus velit dicta earum
-        suscipit commodi eum enim atque at? Et perspiciatis dolore iure
-        voluptatem.`
-    }];
+      appliance: 'Washing machine',
+      description: `Washed baby clothes.`,
+      timestamp: "data",
+      score: 3
+    },
+    {
+      id: '3',
+      appliance: 'Microwave',
+      description: `Cooked potatoes.`,
+      timestamp: "data",
+      score: 5
+    }
+  ];
   
   
     return (
         <>
         {
-            accordionData.map((data: { title: string, content: string }) => {
-                return <AccordionItem key={data.title} title={data.title} content={data.content}/>
+            accordionData.map((data: IApliance) => {
+                return <AccordionItem key={data.id} appliance={data.appliance} description={data.description}/>
             })
         }
         </>
