@@ -1,18 +1,26 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ActivityOptions from "../components/Activity/ActivityOptions";
 import activitiesData from "../components/Activity/activities_db";
 import { useForm } from "../hooks";
-import { IActivity } from "../interfaces/IActivity";
+import mpld3_load_lib from "../components/Dashboard/mpld3_load_lib ";
+import mpld3 from 'mpld3';
 
 export function Activity () {
     const navigate = useNavigate();
     const [points, setPoints] = useState(0);
     const [visible, setVisible] = useState(false);
-    // const [startDate, setStartDate] = useState([]);
-    // const [startTime, setStartTime] = useState([]);
-    // const [duration, setDuration] = useState([]);
-    // const [activityName, setActivityName] = useState([]);
+    const [data, setData] = useState([]);
+    
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/when-should-i')
+         .then((response) => response.json())
+         .then((data) => {
+            setData(data);
+         })
+         .catch((err) => {
+            console.log(err.message);
+         });
+    }, []);
 
     const initialState = {
         activityStartDate: "",
@@ -37,16 +45,29 @@ export function Activity () {
             console.log(err.message);
             });
     }
-
+    const fig_name = "fig_el427345810798888193429725";
     return (
         <>
-        <div className="d-flex vh-100 align-middle justify-content-center align-items-center">
-            <form onSubmit={onSubmit} className="col-lg-4 col-md-offset-6">
+        <div className="row d-flex vh-100 align-middle justify-content-center align-items-center">
+            <div className="col-6 text-center align-items-center">
+                {
+                    mpld3_load_lib("https://d3js.org/d3.v5.js", function () {
+                        mpld3_load_lib("https://mpld3.github.io/js/mpld3.v0.5.8.js", function () {
+                        mpld3.remove_figure(fig_name)
+                        mpld3.draw_figure(fig_name, data);
+                        })
+                    })
+                }   
+                <div id={fig_name}></div>
+            </div>
+            <div className="offset-1 col-4">
+
+            <form onSubmit={onSubmit}>
                 <div className="form-group">
                     <label htmlFor="activityName" className="my-2">Appliance</label>
                     <select name="activityName" className="form-select" aria-label="Default select example" defaultValue={activitiesData[0].appliance_name}>
                         {
-                            activitiesData.map((data: IActivity) => {
+                            activitiesData.map((data) => {
                                 return <option key={data.id} value={data.appliance_name}>{data.appliance_name}</option>
                             })
                         }
@@ -73,11 +94,12 @@ export function Activity () {
                             <strong>Well done! </strong> You earned {points} points!
                         </div>
                         : <div className="mt-5 alert alert-danger">
-                            <strong>Oops! </strong>Seems like you didn't pick the best time. Go back to the dashboard to check when should you do your activities.
+                            <strong>Oops! </strong>Seems like you didn't pick the best time.
                         </div>
                 }
                 
             </form>
+            </div>
             
         </div>
         </>

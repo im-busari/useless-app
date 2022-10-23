@@ -6,6 +6,7 @@ import TokenIcon from "../assets/images/token.png";
 import GoalIcon from "../assets/images/goal.png";
 import { Pie } from '../components/Dashboard/ProgressBar';
 import { CarbonChart } from '../components/Dashboard/CarbonChart';
+import { NavLink } from 'react-router-dom';
 
 const Dashboard = () => {
     // Calculate the percantege of progress = reached to goal
@@ -31,7 +32,12 @@ const Dashboard = () => {
                         <h5 className='align-self-center p-2'>12/50</h5>
                     </div>
                     <hr />
-                    <button type="button" style={{ backgroundColor: "#A3BF56", color: "white"}} className="font-weight-bold btn btn-lg btn-block w-100 mt-5 mb-3 b-green">When should I?</button>
+                    <button type="button" style={{ backgroundColor: "#A3BF56", color: "white"}} className="font-weight-bold btn btn-lg btn-block w-100 mt-5 mb-3 b-green">
+                        
+                        <NavLink to="/tasks">
+                        When should I?
+                        </NavLink>
+                    </button>
                 </div>
                 <div className="offset-1 col-7">
                     <div className='mb-5'>
