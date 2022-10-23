@@ -17,15 +17,15 @@ const Dashboard = () => {
                 <div className="card col-3 text-center align-items-center">
                     <Pie percentage={20} colour="#A3BF56"/>
                     
-                    <div className="d-flex justify-content-between bg-light w-100 my-2">
+                    <div className="d-flex justify-content-between rounded bg-light w-100 my-2">
                         <img src={RankIcon} alt="rank" className='col-2 p-2'/>
                         <h5 className='align-self-center p-2'>24</h5>
                     </div>
-                    <div className="d-flex justify-content-between bg-light w-100 my-2">
+                    <div className="d-flex justify-content-between rounded bg-light w-100 my-2">
                         <img src={TokenIcon} alt="Points" className='col-2 p-2'/>
                         <h5 className='align-self-center p-2'>156</h5>
                     </div>
-                    <div className="d-flex justify-content-between bg-light w-100 my-2">
+                    <div className="d-flex justify-content-between rounded bg-light w-100 my-2">
                         <img src={GoalIcon} alt="Goal" className='col-2 p-2'/>
                         <h5 className='align-self-center p-2'>Weekly</h5>
                         <h5 className='align-self-center p-2'>12/50</h5>

@@ -8,7 +8,7 @@ const AccordionItem = (props: IApliance) => {
     return (
     <div className='w-100 my-2'>
         <div className="accordion-item">
-          <div className="d-flex justify-content-between bg-light p-3" onClick={() => setIsActive(!isActive)}>
+          <div className="d-flex justify-content-between bg-light rounded p-3" onClick={() => setIsActive(!isActive)}>
             <div>{appliance}</div>
             <div>&#8595;</div>
           </div>

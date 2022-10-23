@@ -5,6 +5,7 @@ import { Login, SignUp, Calculator } from './pages';
 import Navbar from './components/shared/Navbar';
 import Dashboard from './pages/Dashboard';
 import Leaderboard from './pages/Leaderboard';
+import ActivityOptions from './components/Activity/ActivityOptions';
 
 function App() {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/calculator" element={<Calculator />} />
-          <Route path="/tasks" element={<Calculator />} />
+          <Route path="/tasks" element={<ActivityOptions />} />
           </Routes>
         </div>
         
