@@ -67,7 +67,7 @@ def graph(duration = 1):
     today = datetime.date.today()
     today_string = today.strftime('%Y-%m-%dT%H:%MZ')
     duration = int(duration)
-    url = 'https://api.carbonintensity.org.uk/intensity/' + today_string? + '/fw24h'
+    url = 'https://api.carbonintensity.org.uk/intensity/' + today_string + '/fw24h'
     r = requests.get(url, headers = headers)
     r = r.json()
     data = pd.json_normalize(r['data'], max_level=1)
@@ -80,7 +80,7 @@ def graph(duration = 1):
     without = pd.DataFrame(shifted.iloc[duration*2:])
     without["intensity.forecast"] = without["intensity.forecast"].round(0).astype(int)
 
-    fig = plt.figure(figsize =(12, 10))
+    fig = plt.figure(figsize =(4, 4))
     without = without.reset_index()
     plt.plot(without["from"], without["intensity.forecast"])
     min_value = without['intensity.forecast'].min()
