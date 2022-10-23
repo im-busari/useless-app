@@ -16,8 +16,11 @@ origins = [
     "http://localhost:3000",
 ]
 
-def floor_dt(dt, delta):
-    return dt - (dt-datetime.min) % delta
+def round_dt(dt,delta):
+    if dt.minute > 30:
+        return dt - timedelta(0, dt.minute*60+dt.second) + timedelta(0, 30*60)
+    else:
+        return dt - timedelta(0, dt.minute*60+dt.second)
 
 app = FastAPI()
 app.add_middleware(
