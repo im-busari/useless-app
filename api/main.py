@@ -59,7 +59,7 @@ def graph():
     data = data.set_index('from')
     data = data.reset_index()
     data['from'] = pd.to_datetime(data['from'], format = '%Y-%m-%dT%H:%MZ')
-    fig = plt.figure(figsize =(4, 4))
+    fig = plt.figure(figsize =(8, 4))
     plt.plot(data["from"], data["intensity.forecast"])
     content = plt.savefig("graph.png")
     #return Response(content=content, media_type="image/png")
