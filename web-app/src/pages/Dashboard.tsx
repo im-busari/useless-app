@@ -31,7 +31,7 @@ const Dashboard = () => {
                         <h5 className='align-self-center p-2'>12/50</h5>
                     </div>
                     <hr />
-                    <button type="button" style={{ backgroundColor: "#A3BF56", color: "white"}} className="font-weight-bold btn btn-lg btn-block w-100 mt-5 mb-3 b-green">Carbon calculator</button>
+                    <button type="button" style={{ backgroundColor: "#A3BF56", color: "white"}} className="font-weight-bold btn btn-lg btn-block w-100 mt-5 mb-3 b-green">When should I?</button>
                 </div>
                 <div className="offset-1 col-7">
                     <div className='mb-5'>

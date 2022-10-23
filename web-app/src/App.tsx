@@ -6,6 +6,7 @@ import Navbar from './components/shared/Navbar';
 import Dashboard from './pages/Dashboard';
 import Leaderboard from './pages/Leaderboard';
 import ActivityOptions from './components/Activity/ActivityOptions';
+import { Activity } from './pages/Activity';
 
 function App() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/calculator" element={<Calculator />} />
-          <Route path="/tasks" element={<ActivityOptions />} />
+          <Route path="/tasks" element={<Activity />} />
           </Routes>
         </div>
         
