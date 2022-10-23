@@ -63,9 +63,11 @@ def graph():
 
 """Pass in a date and time and a duration in hours (can have .5's), get a graph of the rolling average over the next (almost) 24 hours and the points you'll get for various start times."""
 @app.get("/when-should-i")
-def graph(date = "2022-10-22T12:35Z", duration = 1):
+def graph(duration = 1):
+    today = datetime.date.today()
+    today_string = today.strftime('%Y-%m-%dT%H:%MZ')
     duration = int(duration)
-    url = 'https://api.carbonintensity.org.uk/intensity/' + date + '/fw24h'
+    url = 'https://api.carbonintensity.org.uk/intensity/' + today_string + '/fw24h'
     r = requests.get(url, headers = headers)
     r = r.json()
     data = pd.json_normalize(r['data'], max_level=1)
@@ -78,7 +80,7 @@ def graph(date = "2022-10-22T12:35Z", duration = 1):
     without = pd.DataFrame(shifted.iloc[duration*2:])
     without["intensity.forecast"] = without["intensity.forecast"].round(0).astype(int)
 
-    fig = plt.figure(figsize =(12, 10))
+    fig = plt.figure(figsize =(4, 4))
     without = without.reset_index()
     plt.plot(without["from"], without["intensity.forecast"])
     min_value = without['intensity.forecast'].min()
