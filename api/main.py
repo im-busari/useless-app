@@ -11,7 +11,11 @@ headers = {
   'Accept': 'application/json'
 }
 
+def floor_dt(dt, delta):
+    return dt - (dt-datetime.min) % delta
+
 app = FastAPI()
+
 
 """This endpoint returns a JSON dictionary with the top three slots for a given date and duration up to 24 hours in advance."""
 """@app.get("/top-three-slots")
@@ -100,6 +104,7 @@ def pointsForLogging(date = "2022-10-22T12:35Z", duration = 1):
     min_value = without['intensity.forecast'].min()
     max_value = without['intensity.forecast'].max()
     points = 0
+
     for step, value in without[['from','intensity.forecast']].values:
         steppy = step.to_pydatetime()
         if value < min_value + (max_value-min_value)*0.125:
