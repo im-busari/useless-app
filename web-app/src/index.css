@@ -1,3 +1,7 @@
+:root {
+  --green-5: #8DA939;
+}
+
 body {
   height: 100%;
   margin: 0;
@@ -11,5 +15,9 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.b-green {
+  background-color: #8DA939;
 }
 
