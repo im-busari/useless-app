@@ -47,7 +47,6 @@ def top_three_slots(date = "2022-10-22T12:35Z", duration = 0.5):
 
 """This endpoint returns a JSON dictionary with a graph of the carbon intensity over the next 24 hours."""
 @app.get("/graph")
-# , responses = {200: {"content": {"image/png": {}}}}, response_class=Response,
 def graph():
     today = datetime.date.today()
     today_string = today.strftime('%Y-%m-%dT%H:%MZ')
@@ -61,8 +60,6 @@ def graph():
     data['from'] = pd.to_datetime(data['from'], format = '%Y-%m-%dT%H:%MZ')
     fig = plt.figure(figsize =(8, 4))
     plt.plot(data["from"], data["intensity.forecast"])
-    content = plt.savefig("graph.png")
-    #return Response(content=content, media_type="image/png")
     return mpld3.fig_to_dict(fig)
 
 """Pass in a date and time and a duration in hours (can have .5's), get a graph of the rolling average over the next (almost) 24 hours and the points you'll get for various start times."""
