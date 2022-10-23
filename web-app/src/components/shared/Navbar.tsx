@@ -18,7 +18,7 @@ const Navbar = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/leadarboard" className={isActive => "nav-link px-2" + (!isActive ? " unselected" : "") }>
+                            <NavLink to="/leaderboard" className={isActive => "nav-link px-2" + (!isActive ? " unselected" : "") }>
                                 Leaderboard
                             </NavLink>
                         </li>
