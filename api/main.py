@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import matplotlib.pyplot as plt, mpld3
 import matplotlib.dates as mdates
 import datetime
@@ -11,10 +12,21 @@ headers = {
   'Accept': 'application/json'
 }
 
+origins = [
+    "http://localhost:3000",
+]
+
 def floor_dt(dt, delta):
     return dt - (dt-datetime.min) % delta
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 """This endpoint returns a JSON dictionary with the top three slots for a given date and duration up to 24 hours in advance."""
