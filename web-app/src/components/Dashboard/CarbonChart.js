@@ -6,7 +6,7 @@ export const CarbonChart = () => {
     const [data, setData] = useState([]);
     
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/when-should-i')
+        fetch('http://127.0.0.1:8000/graph')
          .then((response) => response.json())
          .then((data) => {
             setData(data);

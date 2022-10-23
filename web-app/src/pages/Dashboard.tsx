@@ -15,7 +15,7 @@ const Dashboard = () => {
         <div className="mt-5">
             <div className="row d-flex justify-content-center">
                 <div className="card col-3 text-center align-items-center">
-                    <Pie percentage={percentage} colour="#A3BF56"/>
+                    <Pie percentage={20} colour="#A3BF56"/>
                     
                     <div className="d-flex justify-content-between rounded bg-light w-100 my-2">
                         <img src={RankIcon} alt="rank" className='col-2 p-2'/>
