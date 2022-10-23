@@ -5,6 +5,7 @@ import RankIcon from "../assets/images/podium.png";
 import TokenIcon from "../assets/images/token.png";
 import GoalIcon from "../assets/images/goal.png";
 import { Pie } from '../components/Dashboard/ProgressBar';
+import { CarbonChart } from '../components/Dashboard/CarbonChart';
 
 const Dashboard = () => {
     // Calculate the percantege of progress = reached to goal
@@ -33,9 +34,17 @@ const Dashboard = () => {
                     <button type="button" style={{ backgroundColor: "#A3BF56", color: "white"}} className="font-weight-bold btn btn-lg btn-block w-100 mt-5 mb-3 b-green">Carbon calculator</button>
                 </div>
                 <div className="offset-1 col-7">
-                    <span className="text-uppercase">Recent activity</span>
-                    <hr/>
-                    <AccordionList />
+                    <div className='mb-5'>
+                        <span className="text-uppercase">Carbon Analysis</span>
+                        <hr/>
+                        <CarbonChart />
+                    </div>
+
+                    <div>
+                        <span className="text-uppercase">Recent activity</span>
+                        <hr/>
+                        <AccordionList />
+                    </div>
                 </div>
                 
             </div>
