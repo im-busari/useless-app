@@ -3,6 +3,7 @@ import users from "./database";
 import UserItem from "./UserItem";
 
 const UsersList = () => {
+    // We could add dropdown to select the top people per - week/month/year
     return (
         <>
         {

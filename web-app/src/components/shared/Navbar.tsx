@@ -28,12 +28,12 @@ const Navbar = () => {
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to="/savings" className={isActive => "nav-link px-2" + (!isActive ? " unselected" : "") }>
+                            <NavLink to="/savings" className={isActive => "nav-link px-2 disabled" + (!isActive ? " unselected" : "") }>
                                 Savings
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to="/consumption" className={isActive => "nav-link px-2" + (!isActive ? " unselected" : "") }>
+                            <NavLink to="/consumption" className={isActive => "nav-link px-2 disabled" + (!isActive ? " unselected" : "") }>
                                 Consumption
                             </NavLink>
                         </li>
