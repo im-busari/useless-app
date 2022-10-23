@@ -7,6 +7,7 @@ import matplotlib.dates as mdates
 import datetime
 import numpy as np
 from fastapi.responses import Response
+from datetime import timedelta
 
 headers = {
   'Accept': 'application/json'
@@ -103,9 +104,11 @@ def graph(duration = 1):
     return mpld3.fig_to_dict(fig)
 
 @app.get("/points-for-logging")
-def pointsForLogging(date = "2022-10-22T12:35Z", duration = 1):
+def pointsForLogging(date = "2023-10-22T12:30Z", duration = 1):
+    today = datetime.date.today()
+    today_string = today.strftime('%Y-%m-%dT%H:%MZ')
     duration = int(duration)
-    url = 'https://api.carbonintensity.org.uk/intensity/' + date + '/fw24h'
+    url = 'https://api.carbonintensity.org.uk/intensity/' + today_string + '/fw24h'
     r = requests.get(url, headers = headers)
     r = r.json()
     data = pd.json_normalize(r['data'], max_level=1)
@@ -120,14 +123,20 @@ def pointsForLogging(date = "2022-10-22T12:35Z", duration = 1):
     without = without.reset_index()
     min_value = without['intensity.forecast'].min()
     max_value = without['intensity.forecast'].max()
-    points = 0
-
-    for step, value in without[['from','intensity.forecast']].values:
-        steppy = step.to_pydatetime()
-        if value < min_value + (max_value-min_value)*0.125:
-            color = (0.46, 0.53, 0.24) # dark green
-        elif value < min_value + (max_value-min_value)*0.25:
-            color = (0.77, 0.91, 0.4) # light green
-        else:
-            color = (1,1,1)
+    year = int(date[0:4])
+    month = int(date[5:7])
+    day = int(date[8:10])
+    hour = int(date[11:13])
+    minute = int(date[14:16])
+    date = datetime.datetime(year, month, day, hour, minute)
+    date = round_dt(date, 30)
+    row = without[without['from']==pd.to_datetime(date)]
+    intensity = row['intensity.forecast'].values
+    if intensity < min_value + (max_value-min_value)*0.125:
+        score = 2
+    elif intensity < min_value + (max_value-min_value)*0.25:
+        score = 1
+    else:
+        score = 0
+    return score
 
