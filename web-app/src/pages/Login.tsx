@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from '../logo.png';
 import { useForm } from "../hooks";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -21,8 +21,16 @@ function Login() {
     // a submit function that will execute upon form submission
     async function loginUserCallback() {
         // send "values" to database
+        localStorage.setItem('token', "valueToken");
+
         return navigate("/dashboard");
     }
+
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+          return navigate("/dashboard");
+        }
+      }, []);
 
     return (
         <div className="d-flex vh-100 align-middle justify-content-center align-items-center">

@@ -8,7 +8,7 @@ interface User {
 
 export default function User(payload: any) {
     return (
-          <div id="profile">
+          <div>
               <>
             {
                 payload.map((value: User, index: number) => (

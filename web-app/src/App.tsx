@@ -20,8 +20,8 @@ function App() {
 
   return (
     <div>
-      <Navbar />
-        {/*  */}
+      { localStorage.getItem('token') && <Navbar /> }
+      
         <div className="container">
         <Routes>
           <Route path="/login" element={<Login />} />

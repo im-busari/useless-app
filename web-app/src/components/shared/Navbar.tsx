@@ -13,8 +13,13 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav">
                         <li className="nav-item active">
-                            <NavLink to="/" className={isActive => "nav-link px-2" + (!isActive ? " unselected" : "") }>
+                            <NavLink to="/dashboard" className={isActive => "nav-link px-2" + (!isActive ? " unselected" : "") }>
                                 Home
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/leadarboard" className={isActive => "nav-link px-2" + (!isActive ? " unselected" : "") }>
+                                Leaderboard
                             </NavLink>
                         </li>
                         <li className="nav-item">
@@ -25,11 +30,6 @@ const Navbar = () => {
                         <li className="nav-item">
                             <NavLink to="/savings" className={isActive => "nav-link px-2" + (!isActive ? " unselected" : "") }>
                                 Savings
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/leadarboard" className={isActive => "nav-link px-2" + (!isActive ? " unselected" : "") }>
-                                Leaderboard
                             </NavLink>
                         </li>
                         <li className="nav-item">
