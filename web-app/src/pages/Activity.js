@@ -29,17 +29,32 @@ export function Activity () {
         activityName: ""
     };
 
-    const { onChange, onSubmit, values } = useForm(
+    const { onChange, onSubmit : onTaskSubmit, values } = useForm(
         submitActivityCallback,
         initialState
     );
+    const { onChange: onGraphChange, onSubmit : onGraphSubmit, values : graphValues } = useForm(
+        submitGraphCallback,
+        { graphDuration: "" }
+    );
+    
+    async function submitGraphCallback() {
+        fetch(`http://127.0.0.1:8000/when-should-i?duration=${graphValues.graphDuration}`)
+            .then((response) => response.json())
+            .then((data) => {
+                setData(data);
+            })
+            .catch((err) => {
+            console.log(err.message);
+            });
+    }
 
     async function submitActivityCallback() {
         console.log(values)
         fetch(`http://127.0.0.1:8000/points-for-logging?date=${values.activityStartDate}T${values.activityStartTime}Z&duration=${values.activityDuration}`)
             .then((response) => response.json())
             .then((data) => {
-             setPoints(data);
+              setPoints(data);
             })
             .catch((err) => {
             console.log(err.message);
@@ -50,6 +65,16 @@ export function Activity () {
         <>
         <div className="row d-flex vh-100 align-middle justify-content-center align-items-center">
             <div className="col-6 text-center align-items-center">
+            <form onSubmit={onGraphSubmit}>
+                <div className="form-group mt-1">
+                    <label htmlFor="graphDuration" className="my-2">Duration</label>
+                    <input type="text" className="form-control" onChange={onGraphChange} name="graphDuration" id="graphDuration" placeholder="1" />
+                </div>
+                <div className="d-flex flex-column align-items-end">
+                    
+                    <button type="submit" className="btn btn-success px-4 py-2 mt-5 float-right">Update</button>
+                </div>
+            </form>
                 {
                     mpld3_load_lib("https://d3js.org/d3.v5.js", function () {
                         mpld3_load_lib("https://mpld3.github.io/js/mpld3.v0.5.8.js", function () {
@@ -62,7 +87,7 @@ export function Activity () {
             </div>
             <div className="offset-1 col-4">
 
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onTaskSubmit}>
                 <div className="form-group">
                     <label htmlFor="activityName" className="my-2">Appliance</label>
                     <select name="activityName" className="form-select" aria-label="Default select example" defaultValue={activitiesData[0].appliance_name}>
