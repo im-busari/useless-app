@@ -80,7 +80,7 @@ def graph(duration = 1):
     without = pd.DataFrame(shifted.iloc[duration*2:])
     without["intensity.forecast"] = without["intensity.forecast"].round(0).astype(int)
 
-    fig = plt.figure(figsize =(8, 6))
+    fig = plt.figure(figsize =(8, 4))
     without = without.reset_index()
     plt.plot(without["from"], without["intensity.forecast"])
     min_value = without['intensity.forecast'].min()
